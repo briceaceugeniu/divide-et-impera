@@ -2,7 +2,6 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
 
 import { Add, Coffee, Edit } from '@mui/icons-material';
 
@@ -43,14 +42,19 @@ export default function TaskCard(config: TaskCardConfig) {
 function createActions(config: TaskCardConfig) {
   const actions = [];
 
-  actions.push((<Link color='#000'><Coffee /></Link>));
+  actions.push((<Link component='button' color='#000'><Coffee /></Link>));
 
-  if (!config.disabled) {
+  if (config.onEditClick) {
     actions.push((
-      <Link href='#' onClick={config.onEditClick}><Edit /></Link>
+      <Link component='button' 
+            onClick={config.onEditClick}><Edit /></Link>
     ));
+  }
+
+  if (config.onAddClick) {
     actions.push((
-      <Link href='#' onClick={config.onAddClick}><Add /></Link>
+      <Link component='button' 
+            onClick={config.onAddClick}><Add /></Link>
     ));
   }
 
