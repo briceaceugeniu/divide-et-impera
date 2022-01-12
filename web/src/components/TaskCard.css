@@ -1,0 +1,32 @@
+/*
+ * Actions (at the bottom of the card)
+ */
+
+.divetimp-task-card .MuiCardActions-root {
+    border-top: #cccccc solid 1px;
+    padding: 0px;
+}
+
+.divetimp-task-card .MuiCardActions-root .MuiTypography-root {
+    padding: 0.2em 1em;
+    margin: 0;
+}
+
+.divetimp-task-card .MuiCardActions-root .MuiLink-root {
+    border-right: #cccccc solid 1px;
+    padding: 0.2em 1em;
+    margin: 0;
+}
+
+.divetimp-task-card {
+    margin-right: 1em;
+    vertical-align: top;
+}
+
+.divetime-incomplete-task {
+   color: gray;
+}
+
+.divetime-complete-task {
+    color: green;
+}
