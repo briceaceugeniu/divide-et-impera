@@ -33,7 +33,7 @@ export default function TaskCard(config: TaskCardConfig) {
         {config.content}
 
       </CardContent>
-      <CardActions>
+      <CardActions className="divetime-task-status">
         {actions}
       </CardActions>
     </Card>
@@ -43,30 +43,31 @@ export default function TaskCard(config: TaskCardConfig) {
 function createActions(config: TaskCardConfig) {
   const actions = [];
 
-  // this is a link since implicitly there's spacing between components
-  // with the same type.
   if (config.percentage >= 100) {
-    actions.push((<Link component='button' className="divetime-complete-task"><Coffee /></Link>));
+    actions.push((<div className="divetime-task-status-item"><Coffee className="divetime-task-status-complete"/></div>));
   } else {
-    actions.push((<Link component='button' className="divetime-incomplete-task"><Coffee /></Link>));
+    actions.push((<div className="divetime-task-status-item"><Coffee className="divetime-task-status-incomplete"/></div>));
   }
 
   if (config.onEditClick) {
     actions.push((
-      <Link component='button' 
+      <Link component='button'
+            className='divetime-task-status-item'
             onClick={config.onEditClick}><Edit /></Link>
     ));
   }
 
   if (config.onAddClick) {
     actions.push((
-      <Link component='button' 
+      <Link component='button'
+            className='divetime-task-status-item'
             onClick={config.onAddClick}><Add /></Link>
     ));
   }
 
   actions.push((
-    <Typography component="div">{config.percentage ? config.percentage : ""}</Typography>
+    <Typography className='divetime-task-status-item' 
+                component="div">{config.percentage ? config.percentage : ""}</Typography>
   ));
 
   return actions;
