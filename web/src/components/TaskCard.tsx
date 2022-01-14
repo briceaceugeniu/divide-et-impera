@@ -9,11 +9,12 @@ import ScrollableContent from './ScrollableContent'
 import { MouseEventHandler } from 'react';
 import { Link } from '@mui/material';
 
+import './TaskCard.css'
+
 interface TaskCardConfig {
     title: string
     content: string
-    percentage?: string
-    disabled?: boolean  // FIXME: disable also the colors?
+    percentage: number
 
     onAddClick?: MouseEventHandler
     onEditClick?: MouseEventHandler
@@ -23,16 +24,16 @@ export default function TaskCard(config: TaskCardConfig) {
   const actions = createActions(config);
 
   return (
-    <Card sx={{maxWidth: 300, display: "inline-block"}}>
+    <Card sx={{width: 280, display: "inline-block"}} className="divetimp-task-card">
       <CardContent>
         <Typography variant="h5" component="div">
         {config.title}
         </Typography>
-        <ScrollableContent>
-          {config.content}
-        </ScrollableContent>
+
+        {config.content}
+
       </CardContent>
-      <CardActions>
+      <CardActions className="divetime-task-status">
         {actions}
       </CardActions>
     </Card>
@@ -42,24 +43,31 @@ export default function TaskCard(config: TaskCardConfig) {
 function createActions(config: TaskCardConfig) {
   const actions = [];
 
-  actions.push((<Link component='button' color='#000'><Coffee /></Link>));
+  if (config.percentage >= 100) {
+    actions.push((<div className="divetime-task-status-item"><Coffee className="divetime-task-status-complete"/></div>));
+  } else {
+    actions.push((<div className="divetime-task-status-item"><Coffee className="divetime-task-status-incomplete"/></div>));
+  }
 
   if (config.onEditClick) {
     actions.push((
-      <Link component='button' 
+      <Link component='button'
+            className='divetime-task-status-item'
             onClick={config.onEditClick}><Edit /></Link>
     ));
   }
 
   if (config.onAddClick) {
     actions.push((
-      <Link component='button' 
+      <Link component='button'
+            className='divetime-task-status-item'
             onClick={config.onAddClick}><Add /></Link>
     ));
   }
 
   actions.push((
-    <Typography component="div">{config.percentage ? config.percentage : ""}</Typography>
+    <Typography className='divetime-task-status-item' 
+                component="div">{config.percentage ? config.percentage : ""}</Typography>
   ));
 
   return actions;

@@ -1,0 +1,41 @@
+/*
+ * Actions (at the bottom of the card)
+ */
+
+.divetimp-task-card {
+  margin-right: 16px;
+  vertical-align: top;
+}
+
+.divetimp-task-card .divetime-task-status {
+  box-sizing: border-box;
+  padding: 0;
+  border-top: #cccccc solid 1px;  
+  height: 33px;
+}
+
+/* we need it so specific, otherwise the padding/margin from MUI kicks in */
+.divetimp-task-card  .divetime-task-status .divetime-task-status-item {
+  margin: 0;
+  padding: 0 16px;
+  height: 32px;
+  line-height: 32px;
+}
+
+.divetimp-task-card .divetime-task-status .divetime-task-status-item svg {
+  padding-top: 4px;
+  height: 24px;
+}
+
+/* separator line between the items */
+.divetimp-task-card .divetime-task-status-item:not(:last-child) {
+  border-right: #cccccc solid 1px;
+}
+
+.divetime-task-status-incomplete {
+  color: gray;
+}
+
+.divetime-task-status-complete {
+  color: green;
+}

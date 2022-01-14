@@ -8,7 +8,7 @@ import TaskCard from './components/TaskCard'
 function App() {
   let longtext = "";
 
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 3; i++) {
     longtext += "some lorem ipsum thingie going on.";
   }
 
@@ -16,11 +16,12 @@ function App() {
     <Container>
       <SentimentSatisfiedRoundedIcon />
       <Alert severity="success">Material UI is working!</Alert>
-      <TaskCard title="Short task" content="Do something" percentage="110%"/>
-      <TaskCard title="Long Task" content={longtext} percentage="110%"/>
+      <TaskCard title="Short task" content="Do something" percentage={10}/>
+      <TaskCard title="Completed" content={longtext} percentage={100}/>
       <TaskCard title="Clickable" content="With clickable links"
                 onAddClick={() => { alert('add') }}
                 onEditClick={() => { alert('edit') }}
+                percentage={10}
                 />
     </Container>
   );
