@@ -13,7 +13,8 @@ if (isset($_GET["user_id"]) && !empty($_GET["user_id"]) && is_int((int)$_GET["us
     $user_id = $_GET["user_id"];
 }
 else {
-    $response["status"] = "Bad request";
+    $response["success"] = false;
+    $response["error_msg"] = "Bad request";
     echo json_encode($response);
     exit();
 }
@@ -22,6 +23,7 @@ global $conn;
 
 $stmt = $conn->prepare("SELECT `id`, `title`, `description`, `progress`, `reward`, `owner`, `parent` FROM `task` WHERE `owner` = ?");
 $stmt->execute(array($user_id));
+$tasks = [];
 while ($row = $stmt->fetch()) {
     $task = [
         "id"=>$row["id"],
@@ -31,7 +33,18 @@ while ($row = $stmt->fetch()) {
         "reward"=>$row["reward"],
         "parent"=>$row["parent"],
         ];
-    $response[] = $task;
+    $tasks[] = $task;
 }
 
+if (!empty($tasks)) {
+    $response["success"] = true;
+    $response["tasks"] = $tasks;
+}
+else {
+    $response["success"] = false;
+    $response["error_msg"] = "User does not have any tasks yet.";
+}
 echo json_encode($response, JSON_PRETTY_PRINT);
+
+
+
