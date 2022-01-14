@@ -9,7 +9,6 @@
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -19,9 +18,9 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `divetimp`
+-- Database (schema): `divetimp`
 --
-CREATE DATABASE IF NOT EXISTS `divetimp` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+CREATE SCHEMA IF NOT EXISTS `divetimp` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `divetimp`;
 
 -- --------------------------------------------------------
@@ -47,6 +46,7 @@ KEY `owner` (`owner`)
 --
 -- Dumping data for table `task`
 --
+START TRANSACTION;
 
 INSERT INTO `task` (`id`, `title`, `description`, `progress`, `reward`, `ts`, `owner`, `parent`) VALUES
  (1, 'Marathon', 'Run the Marathon in less then 6 Hours', 0, 'Coffe', '2022-01-13 18:37:28', 1, 0),
@@ -59,6 +59,8 @@ INSERT INTO `task` (`id`, `title`, `description`, `progress`, `reward`, `ts`, `o
  (8, 'Complete first section HTML + CSS', NULL, 0, 'coffe', '2022-01-13 19:43:20', 1, 6),
  (9, 'complete html section', 'All exercises', 0, 'nothing', '2022-01-13 19:43:20', 1, 8),
  (10, 'complete css section', NULL, 0, 'coffe', '2022-01-13 19:43:20', 1, 8);
+
+COMMIT;
 
 -- --------------------------------------------------------
 
@@ -82,10 +84,13 @@ PRIMARY KEY (`id`)
 --
 -- Dumping data for table `user`
 --
+START TRANSACTION;
 
 INSERT INTO `user` (`id`, `name`, `email`, `password`, `creation_ts`, `last_login`, `ip`, `setting_pref`) VALUES
-(1, 'Boris', 'boris@foo.com', 'SuperSecretPass', '2022-01-13 20:04:17', '2022-01-13 01:06:05', NULL, NULL),
-(2, 'Donald', 'donald@disney.eu', 'qwerty', '2022-01-13 20:16:24', '2022-01-13 04:00:00', NULL, NULL);
+(1, 'Boris', 'boris@foo.com', SHA1(CONCAT('boris@foo.com', 'SuperSecretPass')), '2022-01-13 20:04:17', '2022-01-13 01:06:05', NULL, NULL),
+(2, 'Donald', 'donald@disney.eu', SHA1(CONCAT('donald@disney.eu', 'qwerty')), '2022-01-13 20:16:24', '2022-01-13 04:00:00', NULL, NULL);
+
+COMMIT;
 
 --
 -- Constraints for dumped tables
@@ -96,7 +101,6 @@ INSERT INTO `user` (`id`, `name`, `email`, `password`, `creation_ts`, `last_logi
 --
 ALTER TABLE `task`
     ADD CONSTRAINT `task_ibfk_1` FOREIGN KEY (`owner`) REFERENCES `user` (`id`) ON DELETE RESTRICT;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
