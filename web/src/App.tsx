@@ -1,29 +1,44 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
-import SentimentSatisfiedRoundedIcon from "@mui/icons-material/SentimentSatisfiedRounded";
-import { Alert, Container } from "@mui/material";
 
-import TaskCard from './components/TaskCard'
+import TaskCard from "./components/TaskCard";
+import SupertasksList from "./components/supertasks/SupertasksList";
 
 function App() {
-  let longtext = "";
+  const [tasksCount, setTasksCount] = useState(1);
 
-  for (let i = 0; i < 3; i++) {
-    longtext += "some lorem ipsum thingie going on.";
+  let longtext = [];
+
+  function handleAddTask() {
+    setTasksCount(tasksCount + 1);
+  }
+
+  for (let i = 0; i < tasksCount; i++) {
+    longtext.push(
+      <TaskCard
+        key={i}
+        title={"Clickable" + i}
+        content="With clickable links"
+        onAddClick={() => handleAddTask()}
+        onEditClick={() => {
+          alert("edit");
+        }}
+        percentage={10}
+      />
+    );
   }
 
   return (
-    <Container>
-      <SentimentSatisfiedRoundedIcon />
-      <Alert severity="success">Material UI is working!</Alert>
-      <TaskCard title="Short task" content="Do something" percentage={10}/>
-      <TaskCard title="Completed" content={longtext} percentage={100}/>
-      <TaskCard title="Clickable" content="With clickable links"
-                onAddClick={() => { alert('add') }}
-                onEditClick={() => { alert('edit') }}
-                percentage={10}
-                />
-    </Container>
+    <div className="grid-container">
+      <div className="nav demo">
+        <div>Navbar</div>
+      </div>
+      <div className="task-tree demo">{longtext}</div>
+      <div className="task-list demo">
+        <SupertasksList />
+      </div>
+      <div className="cred demo">Footer</div>
+    </div>
   );
 }
 
