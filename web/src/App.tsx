@@ -3,6 +3,7 @@ import "./App.css";
 
 import TaskCard from "./components/TaskCard";
 import SupertasksList from "./components/supertasks/SupertasksList";
+import RenderTasksTree from "./components/tasks_tree_view/RenderTasksTree";
 
 function App() {
   const [tasksCount, setTasksCount] = useState(1);
@@ -33,7 +34,9 @@ function App() {
       <div className="nav demo">
         <div>Navbar</div>
       </div>
-      <div className="task-tree demo">{justForTestingPurposes}</div>
+      <div className="task-tree demo">
+        <RenderTasksTree tasks={justForTestingPurposes} />
+      </div>
       <div className="task-list demo">
         <SupertasksList />
       </div>
