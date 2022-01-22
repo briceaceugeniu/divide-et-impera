@@ -12,7 +12,12 @@ class TaskFactory extends Factory
     public function definition(): array
     {
     	return [
-    	    //
+    	    'title' => $this->faker->text(50),
+            'description' => $this->faker->paragraph(1),
+            'progress' => $this->faker->randomFloat(2, 0,100),
+            'reward' => $this->faker->text(50),
+            'user_id' => 1,
+            'parent' => 2
     	];
     }
 }
