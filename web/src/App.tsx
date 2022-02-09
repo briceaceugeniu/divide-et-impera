@@ -32,7 +32,7 @@ function App() {
 
   return (
     <div className="grid-container">
-      <div className="nav demo">
+      <div className="nav">
         <NavbarContainer />
       </div>
       <div className="task-tree demo">
