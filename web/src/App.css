@@ -12,7 +12,7 @@
   background-color: lightgray;
 }
 
-.nav { grid-area: nav; height: 15vh; }
+.nav { grid-area: nav;  }
 .task-tree { grid-area: task-tree; height: 80vh; overflow: scroll; }
 .task-list { grid-area: task-list; height: 60vh; }
 .cred { grid-area: cred; height: 20vh; }
@@ -37,5 +37,5 @@
   }
 
   .task-list { height: 20vh; }
-  .nav { height: 10vh; }
+  .nav { height: auto; }
 }
